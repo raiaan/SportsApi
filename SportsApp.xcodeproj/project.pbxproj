@@ -101,12 +101,14 @@
 		4D936318281C7B570067F139 /* SportsApp */ = {
 			isa = PBXGroup;
 			children = (
+				4D936351281C7C1B0067F139 /* models */,
+				4D936350281C7BE80067F139 /* viewModel */,
+				4D93634F281C7BBC0067F139 /* views */,
+				4D93634D281C7BA20067F139 /* ponso */,
+				4D93634C281C7B930067F139 /* constants */,
 				4D936319281C7B570067F139 /* AppDelegate.swift */,
 				4D93631B281C7B570067F139 /* SceneDelegate.swift */,
-				4D93631D281C7B570067F139 /* ViewController.swift */,
-				4D93631F281C7B570067F139 /* Main.storyboard */,
 				4D936325281C7B5C0067F139 /* Assets.xcassets */,
-				4D936327281C7B5C0067F139 /* LaunchScreen.storyboard */,
 				4D93632A281C7B5C0067F139 /* Info.plist */,
 				4D936322281C7B570067F139 /* SportsApp.xcdatamodeld */,
 			);
@@ -128,6 +130,44 @@
 				4D93633F281C7B5C0067F139 /* SportsAppUITestsLaunchTests.swift */,
 			);
 			path = SportsAppUITests;
+			sourceTree = "<group>";
+		};
+		4D93634C281C7B930067F139 /* constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = constants;
+			sourceTree = "<group>";
+		};
+		4D93634D281C7BA20067F139 /* ponso */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ponso;
+			sourceTree = "<group>";
+		};
+		4D93634F281C7BBC0067F139 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				4D93631D281C7B570067F139 /* ViewController.swift */,
+				4D93631F281C7B570067F139 /* Main.storyboard */,
+				4D936327281C7B5C0067F139 /* LaunchScreen.storyboard */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		4D936350281C7BE80067F139 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
+		4D936351281C7C1B0067F139 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
