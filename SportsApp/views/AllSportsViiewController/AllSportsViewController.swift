@@ -11,35 +11,37 @@ import Alamofire
 
 class AllSportsViewController: UIViewController {
     @IBOutlet weak var allSportsCollectionView: UICollectionView!
+    let allSportsViewModel = AllSportsViewModel()
     var allSportsData: [MySport] = []
+    var allSports: AllSports?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fatchDataFromAPI(){ (data, error) in
-            if let error = error {
-                print("a")
-                print(error.localizedDescription)
-            } else {
-                self.allSportsData = data!.sports
-                DispatchQueue.main.async {
-                    self.allSportsCollectionView.reloadData()
-                }
-            }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        allSportsViewModel.bindMoviesViewModelToView = {
+            self.onSuccessUpdateView()
         }
-
+        
+        allSportsViewModel.bindViewModelErrorToView = {
+            self.onFailUpdateView()
+        }
     }
 
+    func onSuccessUpdateView(){
+        allSports = allSportsViewModel.allSportsData
+        allSportsData = allSports!.sports
+        self.allSportsCollectionView.reloadData()
+    }
     
-    func fatchDataFromAPI(completionHandler: @escaping (AllSports?, Error?) -> Void){
-        AF.request(Constants.getAllSportsURL).responseDecodable(of: AllSports.self)  { (response) in
-            switch response.result {
-            case let .success(_):
-                completionHandler(response.value, nil)
-            case let .failure(error):
-                completionHandler(nil, error)
-            }
+    func onFailUpdateView(){
+        let alert = UIAlertController(title: "Error", message: allSportsViewModel.showError, preferredStyle: .alert)
+        let okAction  = UIAlertAction(title: "Ok", style: .default) { (UIAlertAction) in
+        
         }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
