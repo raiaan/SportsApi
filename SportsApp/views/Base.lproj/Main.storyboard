@@ -36,7 +36,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dtP-4r-ISt">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FJq-wc-HFa">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FJq-wc-HFa">
                                     <size key="itemSize" width="216" height="202"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -50,21 +50,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="216" height="202"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mfh-Og-7Hx">
-                                                    <rect key="frame" x="0.0" y="8" width="216" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mfh-Og-7Hx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="216" height="176"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sport Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Y-c9-J0E">
-                                                    <rect key="frame" x="0.0" y="160" width="216" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Y-c9-J0E">
+                                                    <rect key="frame" x="0.0" y="178" width="216" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="f1Y-c9-J0E" secondAttribute="bottom" id="1nN-pC-QJD"/>
+                                                <constraint firstAttribute="trailing" secondItem="f1Y-c9-J0E" secondAttribute="trailing" id="Lif-3Z-fpO"/>
+                                                <constraint firstItem="Mfh-Og-7Hx" firstAttribute="top" secondItem="b3g-aW-Q2j" secondAttribute="top" id="P3I-No-Whx"/>
+                                                <constraint firstItem="f1Y-c9-J0E" firstAttribute="leading" secondItem="b3g-aW-Q2j" secondAttribute="leading" id="k1a-jc-ysh"/>
+                                                <constraint firstItem="Mfh-Og-7Hx" firstAttribute="leading" secondItem="b3g-aW-Q2j" secondAttribute="leading" id="nXW-Aj-Az1"/>
+                                                <constraint firstItem="f1Y-c9-J0E" firstAttribute="top" secondItem="Mfh-Og-7Hx" secondAttribute="bottom" constant="2" id="vj0-m1-lkx"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mfh-Og-7Hx" secondAttribute="trailing" id="xN2-4Y-LS9"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
-                                        <size key="customSize" width="216" height="202"/>
                                         <connections>
                                             <outlet property="allSportImageView" destination="Mfh-Og-7Hx" id="5kl-aS-O8O"/>
                                             <outlet property="sportName" destination="f1Y-c9-J0E" id="seq-g9-9j1"/>
@@ -80,10 +86,10 @@
                         <viewLayoutGuide key="safeArea" id="Gbt-Lh-GpM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Gbt-Lh-GpM" firstAttribute="bottom" secondItem="dtP-4r-ISt" secondAttribute="bottom" id="Lt9-So-FE6"/>
-                            <constraint firstItem="dtP-4r-ISt" firstAttribute="top" secondItem="Gbt-Lh-GpM" secondAttribute="top" id="VD6-YN-bla"/>
-                            <constraint firstItem="Gbt-Lh-GpM" firstAttribute="trailing" secondItem="dtP-4r-ISt" secondAttribute="trailing" id="iby-zL-shx"/>
-                            <constraint firstItem="dtP-4r-ISt" firstAttribute="leading" secondItem="Gbt-Lh-GpM" secondAttribute="leading" id="noq-es-864"/>
+                            <constraint firstItem="dtP-4r-ISt" firstAttribute="trailing" secondItem="Gbt-Lh-GpM" secondAttribute="trailing" id="IvP-Bh-tp2"/>
+                            <constraint firstItem="dtP-4r-ISt" firstAttribute="leading" secondItem="Gbt-Lh-GpM" secondAttribute="leading" id="Um0-Uf-Nhr"/>
+                            <constraint firstItem="dtP-4r-ISt" firstAttribute="bottom" secondItem="Gbt-Lh-GpM" secondAttribute="bottom" id="axc-Kv-sP3"/>
+                            <constraint firstItem="dtP-4r-ISt" firstAttribute="top" secondItem="Gbt-Lh-GpM" secondAttribute="top" id="oYq-po-t1h"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="All Sports" image="ipad.homebutton" catalog="system" id="1gR-yt-ATQ"/>
