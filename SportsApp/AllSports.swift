@@ -8,12 +8,12 @@
 import Foundation
 
 struct MySport: Decodable {
-    let idSport: Double
+    let idSport: String
     let strSport: String
     let strFormat: String
     let strSportThumb: String
     let strSportIconGreen: String
-   // let strSportDescription: String
+    let strSportDescription: String
 }
 
 struct AllSports: Decodable {

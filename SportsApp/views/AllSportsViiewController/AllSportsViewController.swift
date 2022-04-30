@@ -33,24 +33,14 @@ class AllSportsViewController: UIViewController {
     
     func fatchDataFromAPI(completionHandler: @escaping (AllSports?, Error?) -> Void){
         AF.request(Constants.getAllSportsURL).responseDecodable(of: AllSports.self)  { (response) in
-           // print(response.value?.sports[0])
             switch response.result {
-            case let .success(data):
-                // success
-            //    print(data.sports[0])
-                completionHandler(data, nil)
+            case let .success(_):
+                completionHandler(response.value, nil)
             case let .failure(error):
-                // error
                 completionHandler(nil, error)
             }
         }
     }
-    
-    
-    
-    
-    
-    
     
 }
 
@@ -72,8 +62,7 @@ extension AllSportsViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let flowayout = collectionViewLayout as? UICollectionViewFlowLayout
             let space: CGFloat = (flowayout?.minimumInteritemSpacing ?? 0.0) + (flowayout?.sectionInset.left ?? 0.0) + (flowayout?.sectionInset.right ?? 0.0)
-            let size:CGFloat = (allSportsCollectionView.frame.size.width - space) / 2.0
+            let size:CGFloat = (allSportsCollectionView.frame.size.width ) / 2.0
             return CGSize(width: size, height: size)
         }
-    
 }
