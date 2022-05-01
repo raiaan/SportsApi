@@ -12,14 +12,15 @@ import SystemConfiguration
 class CoreDataService{
     
     func convertFromNSObjectToFilm(items:[NSManagedObject])->LeaguesResult{
-        var resultLeagues = LeaguesResult(leagues: [Leagus]())
+        var resultLeagues = LeaguesResult(countrys: [Leagus]())
         for item in items {
-            let id = item.value(forKeyPath: "idLeague") as! Int
+            let id = item.value(forKeyPath: "idLeague") as! String
             let strLeague = item.value(forKeyPath: "strLeague") as! String
             let strLeagueAlternate = item.value(forKeyPath: "strLeagueAlternate") as! String
             let strSport = item.value(forKeyPath: "strSport") as! String
-            let league = Leagus(idLeague: id, strLeague: strLeague, strSport: strSport, strLeagueAlternate: strLeagueAlternate)
-            resultLeagues.leagues.append(league)
+            let strBadge = item.value(forKey: "strBadge") as! String
+            let league = Leagus(idLeague: id, strLeague: strLeague, strSport: strSport, strLeagueAlternate: strLeagueAlternate , strBadge: strBadge)
+            resultLeagues.countrys.append(league)
         }
         return resultLeagues
     }
@@ -39,11 +40,13 @@ class CoreDataService{
         var context:NSManagedObjectContext?
         context = appDelegate.persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Leagues", in: context!)
-        let movie = NSManagedObject(entity: entity!, insertInto: context!)
-        entity?.setValue(item.idLeague , forKey: "idLeague")
-        entity?.setValue(item.strLeague , forKey: "strLeague")
-        entity?.setValue(item.strLeagueAlternate , forKey: "strLeagueAlternate")
-        entity?.setValue(item.strSport, forKey: "strSport")
+        let league = NSManagedObject(entity: entity!,
+                                       insertInto: context)
+        league.setValue(item.idLeague , forKey: "idLeague")
+        league.setValue(item.strLeague , forKey: "strLeague")
+        league.setValue(item.strLeagueAlternate , forKey: "strLeagueAlternate")
+        league.setValue(item.strSport, forKey: "strSport")
+        league.setValue(item.strBadge, forKey: "strBadge")
         do{
             try context?.save()
         }catch let error as NSError{

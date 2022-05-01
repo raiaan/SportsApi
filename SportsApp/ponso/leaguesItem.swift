@@ -7,11 +7,12 @@
 
 import Foundation
 struct LeaguesResult:Decodable {
-    var leagues:[Leagus]
+    var countrys:[Leagus]
 }
 struct Leagus:Decodable{
-    let idLeague:Int
+    let idLeague:String
     let strLeague:String
     let strSport:String
     let strLeagueAlternate:String
+    let strBadge:String
 }
