@@ -6,24 +6,29 @@
 //
 
 import UIKit
+import SDWebImage
 
-class FavoriteViewController: UIViewController {
+class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableViewDataSource {
 
+    @IBOutlet weak var leaguesTable: UITableView!
+    let viewModel = LeagueViewModel(appDelegate: (UIApplication.shared.delegate as? AppDelegate)!)
+    var leagues = [Leagus]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        leagues = viewModel.favLeaguesData.countrys
+        leaguesTable.delegate = self
+        leaguesTable.dataSource = self
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return leagues.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableViewCell
+        cell.leagueTitle.text = leagues[indexPath.row].strLeague
+        cell.leagueSport.text = leagues[indexPath.row].strSport
+        cell.leagueBadge.sd_setImage(with: URL(string: leagues[indexPath.row].strBadge) )
+        return cell
     }
-    */
-
 }
