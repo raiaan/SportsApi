@@ -7,7 +7,7 @@
 
 import UIKit
 import SDWebImage
-
+import Alamofire
 class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableViewDataSource {
 
     @IBOutlet weak var leaguesTable: UITableView!
@@ -30,5 +30,19 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
         cell.leagueSport.text = leagues[indexPath.row].strSport
         cell.leagueBadge.sd_setImage(with: URL(string: leagues[indexPath.row].strBadge) )
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if currentReachabilityStatus == .notReachable {
+            showDialoug()
+        } else {
+           print("reachable")
+        }
+        print("selected")
+    }
+    func showDialoug(){
+        //make the alert
+        let alert = UIAlertController (title: "No Connection!", message: "sorry there's no Internet Connection to Display Leagues details", preferredStyle: UIAlertController.Style.alert )
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
