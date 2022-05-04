@@ -69,6 +69,7 @@
                                             <outlet property="leagueSport" destination="b1q-nE-VjH" id="x0G-EO-1Ah"/>
                                             <outlet property="leagueTitle" destination="1VS-Bj-rx2" id="Ar5-lq-6IX"/>
                                             <outlet property="youtubeImageLink" destination="g6x-fF-ebJ" id="31b-IW-CfH"/>
+                                            <segue destination="VGp-Qg-8pi" kind="show" identifier="showLeaguesDetails" id="9fR-AZ-eCB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -167,6 +168,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWh-kv-GNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2730.434782608696" y="194.86607142857142"/>
+        </scene>
+        <!--Leagues Details View Controller-->
+        <scene sceneID="mZe-wj-BXb">
+            <objects>
+                <viewController storyboardIdentifier="LeaguesDetailsViewController" id="VGp-Qg-8pi" customClass="LeaguesDetailsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8F7-g2-xY8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Ghk-IT-H9a"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9No-af-F3F"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QGc-3e-d8A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3465" y="931"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hIa-xy-owy">

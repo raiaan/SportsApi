@@ -20,6 +20,15 @@ class AllSportsService {
             }
         }
     }
-    
+    func fatchDataItemsFromAPI<T:Decodable>(url:String ,typeItem:  T.Type ,completionHandler: @escaping ( T? , Error?) -> Void){
+        AF.request(Constants.getAllSportsURL).responseDecodable(of: T.self )  { (response) in
+            switch response.result {
+            case let .success(data):
+                completionHandler(data, nil)
+            case let .failure(error):
+                completionHandler(nil, error)
+            }
+        }
+    }
     
 }

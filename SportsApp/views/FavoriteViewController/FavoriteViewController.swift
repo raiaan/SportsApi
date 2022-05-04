@@ -13,12 +13,24 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
     @IBOutlet weak var leaguesTable: UITableView!
     let viewModel = LeagueViewModel(appDelegate: (UIApplication.shared.delegate as? AppDelegate)!)
     var leagues = [Leagus]()
-    
+    var currentSelectedItem:Leagus?
     override func viewDidLoad() {
         super.viewDidLoad()
         leagues = viewModel.favLeaguesData.countrys
         leaguesTable.delegate = self
         leaguesTable.dataSource = self
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let leaguesDetail = segue.destination as! LeaguesDetailsViewController
+        leaguesDetail.league = currentSelectedItem 
+    }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if currentReachabilityStatus == .notReachable {
+            showDialoug()
+            return false
+        } else {
+           return true
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return leagues.count
@@ -32,15 +44,9 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if currentReachabilityStatus == .notReachable {
-            showDialoug()
-        } else {
-           print("reachable")
-        }
-        print("selected")
+        currentSelectedItem = leagues[indexPath.row]
     }
     func showDialoug(){
-        //make the alert
         let alert = UIAlertController (title: "No Connection!", message: "sorry there's no Internet Connection to Display Leagues details", preferredStyle: UIAlertController.Style.alert )
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
