@@ -65,4 +65,9 @@ extension AllSportsViewController: UICollectionViewDelegate, UICollectionViewDat
             let side = (view.frame.size.width - 16.0 )/2
             return CGSize(width: side, height: side)
         }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var sportLegue = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesSportTableViewController") as! LeaguesSportTableViewController
+        sportLegue.setSport(sport: allSportsData[indexPath.row])
+        self.navigationController?.pushViewController(sportLegue, animated: true)
+    }
 }

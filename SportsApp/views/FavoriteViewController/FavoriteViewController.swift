@@ -16,6 +16,7 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
     var currentSelectedItem:Leagus?
     override func viewDidLoad() {
         super.viewDidLoad()
+        leaguesTable.register( LeaguesTableViewCell.self, forCellReuseIdentifier: LeaguesTableViewCell.identifier )
         leagues = viewModel.favLeaguesData.countrys
         leaguesTable.delegate = self
         leaguesTable.dataSource = self
@@ -25,7 +26,6 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
         guard let  indexPath = sender as? IndexPath else { return }
         leaguesDetail.league = leagues[indexPath.row]
         leaguesDetail.shouldUpdateView = true
-        
     }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if currentReachabilityStatus == .notReachable {
@@ -40,7 +40,7 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: LeaguesTableViewCell.identifier, for: indexPath) as! LeaguesTableViewCell
         cell.leagueTitle.text = leagues[indexPath.row].strLeague
         cell.leagueSport.text = leagues[indexPath.row].strSport
         cell.leagueBadge.sd_setImage(with: URL(string: leagues[indexPath.row].strBadge) )
@@ -48,6 +48,9 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "showLeaguesDetails", sender: indexPath)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
     }
     func showDialoug(){
         let alert = UIAlertController (title: "No Connection!", message: "sorry there's no Internet Connection to Display Leagues details", preferredStyle: UIAlertController.Style.alert )

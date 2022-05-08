@@ -21,7 +21,7 @@ struct Constants {
         return "\(baseURL)eventsseason.php?id=\(leaguesID)"
     }
     static func getLeaguesBySportName(sportName:String)->String{
-        return "\(baseURL)eventsseason.php?s=\(sportName)"
+        return "\(baseURL)search_all_leagues.php?s=\(sportName)"
     }
     //static let getLeaguesTeams = "https://www.thesportsdb.com/api/v1/json/2/search_all_teams.php?l=English%20Premier%20League"
 }
