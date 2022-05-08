@@ -22,14 +22,17 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let leaguesDetail = segue.destination as! LeaguesDetailsViewController
-        leaguesDetail.league = currentSelectedItem 
+        guard let  indexPath = sender as? IndexPath else { return }
+        leaguesDetail.league = leagues[indexPath.row]
+        leaguesDetail.shouldUpdateView = true
+        
     }
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if currentReachabilityStatus == .notReachable {
             showDialoug()
             return false
         } else {
-           return true
+           return false
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,7 +47,7 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentSelectedItem = leagues[indexPath.row]
+        self.performSegue(withIdentifier: "showLeaguesDetails", sender: indexPath)
     }
     func showDialoug(){
         let alert = UIAlertController (title: "No Connection!", message: "sorry there's no Internet Connection to Display Leagues details", preferredStyle: UIAlertController.Style.alert )

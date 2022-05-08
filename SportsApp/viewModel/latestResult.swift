@@ -7,7 +7,7 @@
 
 import Foundation
 struct LeaguesLatestResult:Decodable {
-    var results:[Event]
+    let events:[EventResult]
 }
 struct EventResult:Decodable{
     let idEvent:String
@@ -17,4 +17,5 @@ struct EventResult:Decodable{
     let dateEvent:String
     let intHomeScore:String
     let intAwayScore:String
+    let strThumb:String
 }

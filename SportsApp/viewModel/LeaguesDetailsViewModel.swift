@@ -55,7 +55,7 @@ class LeaguesDetailViewModel {
         self.fetchLeaguesLatestResultFromAPI()
         self.fetchLeaguesUpcomingEventsFromAPI()
     }
-    
+    //working correctly
     func fetchLeaguesTeamsFromAPI (){
         allSportsService.fatchDataItemsFromAPI(url: Constants.getLeaguesTeams(leagues: leagues.strLeague), typeItem: TeamsResult.self) { (allSportsData, error) in
             if let error = error {
@@ -66,6 +66,7 @@ class LeaguesDetailViewModel {
             }
         }
     }
+    //the link not working properly
     func fetchLeaguesUpcomingEventsFromAPI (){
         allSportsService.fatchDataItemsFromAPI(url: Constants.getLeaguesUpcomingEvent(leaguesID: Int(leagues.idLeague)!) , typeItem: LeaguesLatestEvent.self) { (allSportsData, error) in
             if let error = error {
@@ -73,6 +74,7 @@ class LeaguesDetailViewModel {
                 self.showUpcomingError = message
             } else {
                 self.allUpcomingData = allSportsData
+                
             }
         }
     }
@@ -81,8 +83,10 @@ class LeaguesDetailViewModel {
             if let error = error {
                 let message = error.localizedDescription
                 self.showUpcomingError = message
+                print(message)
             } else {
                 self.allLatestData = allSportsData
+                print(allSportsData)
             }
         }
     }
