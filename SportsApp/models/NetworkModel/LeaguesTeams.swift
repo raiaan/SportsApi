@@ -13,6 +13,6 @@ struct Team:Decodable{
     let idTeam:String
     let strTeam:String
     let strTeamBadge:String
-    let strStadiumThumb:String
+    let strStadiumThumb:String?
     
 }

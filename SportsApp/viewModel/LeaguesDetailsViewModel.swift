@@ -70,8 +70,10 @@ class LeaguesDetailViewModel {
             if let error = error {
                 let message = error.localizedDescription
                 self.showTeamsError = message
+                print(error)
             } else {
                 self.allTeamsData = allSportsData
+                print(allSportsData)
             }
         }
     }

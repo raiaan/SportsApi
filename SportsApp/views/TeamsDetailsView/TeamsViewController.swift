@@ -17,7 +17,7 @@ class TeamsViewController: UIViewController {
         super.viewDidLoad()
         if let team = team {
             teamLogoIMG.sd_setImage(with: URL(string: team.strTeamBadge))
-            strStadiumThumbIMG.sd_setImage(with: URL(string: team.strStadiumThumb))
+            strStadiumThumbIMG.sd_setImage(with: URL(string: team.strStadiumThumb ?? ""))
         }
     }
     func setTeam(team:Team){
