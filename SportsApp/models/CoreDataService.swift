@@ -37,6 +37,21 @@ class CoreDataService{
             print("Could not fetch. \(error), \(error.userInfo)")
           }
     }
+    func getSingleLeagueFromCoreData(appDelegate:AppDelegate ,l:Leagus, compeletion :@escaping (LeaguesResult?)->()){
+        var context:NSManagedObjectContext?
+        context = appDelegate.persistentContainer.viewContext
+        let fetchRec = NSFetchRequest<NSManagedObject>(entityName: "Leagues")
+        fetchRec.predicate = NSPredicate(format: "idLeague = %@", l.idLeague)
+        do {
+            let leaguesEntity = try context!.fetch(fetchRec)
+           compeletion(convertFromNSObjectToFilm(items: leaguesEntity))
+          } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+          }
+    }
+//    func removeLeagueFromCoreData(appDelegate:AppDelegate , compeletion :@escaping (LeaguesResult?)->()){
+//
+//    }
     func saveToRoom(appDelegate:AppDelegate , item:Leagus){
         var context:NSManagedObjectContext?
         context = appDelegate.persistentContainer.viewContext

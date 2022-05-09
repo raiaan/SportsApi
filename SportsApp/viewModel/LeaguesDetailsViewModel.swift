@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import CoreData
 class LeaguesDetailViewModel {
     var allSportsService: AllSportsService!
+    var coreDataService:CoreDataService!
     var leagues:Leagus
     var allTeamsData : TeamsResult! {
         didSet {
@@ -19,9 +21,6 @@ class LeaguesDetailViewModel {
             self.bindLeaguesTeamsErrorToView()
         }
     }
-    var bindLeaguesTeamsToView : (()->()) = {}
-    var bindLeaguesTeamsErrorToView : (()->()) = {}
-    
     var allUpcomingData : LeaguesLatestEvent! {
         didSet {
             self.bindLeaguesUpcomingToView()
@@ -32,9 +31,6 @@ class LeaguesDetailViewModel {
             self.bindLeaguesUpcomingErrorToView()
         }
     }
-    var bindLeaguesUpcomingToView : (()->()) = {}
-    var bindLeaguesUpcomingErrorToView : (()->()) = {}
-    
     var allLatestData : LeaguesLatestResult! {
         didSet {
             self.bindLeaguesLatestToView()
@@ -45,15 +41,27 @@ class LeaguesDetailViewModel {
             self.bindLeaguesLatestErrorToView()
         }
     }
+    
     var bindLeaguesLatestToView : (()->()) = {}
     var bindLeaguesLatestErrorToView : (()->()) = {}
-    
+    var bindLeaguesUpcomingToView : (()->()) = {}
+    var bindLeaguesUpcomingErrorToView : (()->()) = {}
+    var bindLeaguesTeamsToView : (()->()) = {}
+    var bindLeaguesTeamsErrorToView : (()->()) = {}
+    var favouriteIcon:String{
+        didSet{
+            self.updateFavState()
+        }
+    }
+    var updateFavState: (()->()) = {}
     init(leagues:Leagus) {
         self.leagues = leagues
         self.allSportsService = AllSportsService()
+        self.favouriteIcon = "heart"
         self.fetchLeaguesTeamsFromAPI()
         self.fetchLeaguesLatestResultFromAPI()
         self.fetchLeaguesUpcomingEventsFromAPI()
+        self.coreDataService  = CoreDataService()
     }
     //working correctly
     func fetchLeaguesTeamsFromAPI (){
@@ -83,11 +91,29 @@ class LeaguesDetailViewModel {
             if let error = error {
                 let message = error.localizedDescription
                 self.showUpcomingError = message
-                print(message)
             } else {
                 self.allLatestData = allSportsData
-                print(allSportsData)
             }
         }
+    }
+    func toggleFav(appDelegate:AppDelegate){
+        if(favouriteIcon == "heart"){
+            addToFavourite(appDelegate: appDelegate)
+           // self.favouriteIcon = "heart_fill"
+        }else{
+            self.favouriteIcon = "heart"
+        }
+    }
+    func addToFavourite(appDelegate:AppDelegate){
+        coreDataService.saveToRoom(appDelegate: appDelegate , item: leagues)
+    }
+    func getFavouriteIcon(appDelegate:AppDelegate)->String{
+        coreDataService.getSingleLeagueFromCoreData(appDelegate: appDelegate, l: leagues){ (result) in
+            guard result != nil else {return}
+            if(result?.countrys.count != 0){
+                self.favouriteIcon = "heart_fill"
+            }
+        }
+        return favouriteIcon
     }
 }

@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 import SDWebImage
-import Alamofire
 
 class LeaguesDetailsViewController: UIViewController {
     var leaguesDetail:LeaguesDetailViewModel?
     var league:Leagus?
-    var shouldUpdateView:Bool?{
+    var appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+    var shouldUpdateView:Bool = false{
         didSet{
             leaguesDetail = LeaguesDetailViewModel(leagues: league!)
         }
@@ -28,6 +28,15 @@ class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViewModelCallingBack()
+        if(shouldUpdateView == true){
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(
+                    named:(leaguesDetail?.getFavouriteIcon(appDelegate:appDelegate))!), style: .plain,
+                target: self, action: #selector(addToFavourite))
+        }else{
+            
+        }
+        
         view.addSubview(table)
         table.delegate = self
         table.dataSource = self
@@ -36,10 +45,11 @@ class LeaguesDetailsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         table.frame = view.bounds
     }
+    @objc func addToFavourite(){
+        leaguesDetail?.toggleFav(appDelegate: appDelegate)
+    }
+    
     func initViewModelCallingBack(){
-        leaguesDetail?.bindLeaguesUpcomingToView = {
-            print(self.leaguesDetail?.allUpcomingData.events.count)
-        }
         leaguesDetail?.bindLeaguesTeamsToView = {
             self.models[1]=(.collectionViewItem(models: (self.leaguesDetail?.allTeamsData.teams)!, rows: 1)
             )
@@ -48,6 +58,14 @@ class LeaguesDetailsViewController: UIViewController {
         leaguesDetail?.bindLeaguesLatestToView = {
             self.models[0] = (.list(models: (self.leaguesDetail?.allLatestData.events)!))
             self.table.reloadData()
+        }
+        if(shouldUpdateView == true){
+//            leaguesDetail?.updateFavState = {
+//                self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+//                    image: UIImage(
+//                        named:(self.leaguesDetail?.getFavouriteIcon(appDelegate:self.appDelegate))!), style: .plain,
+//                    target: self, action: #selector(self.addToFavourite))
+ //           }
         }
     }
 }
