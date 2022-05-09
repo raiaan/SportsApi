@@ -11,6 +11,7 @@ class LatestEventCellTable :UITableViewCell{
     static let identifier = "LatestEventCellTable"
     private let collectionView:UICollectionView
     public var models = [Team]()
+    public var navigateToTeamDetails : ((Team)->()) = {team in }
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -35,5 +36,22 @@ class LatestEventCellTable :UITableViewCell{
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+extension LatestEventCellTable: UICollectionViewDelegate , UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return models.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let model = models[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeamCellCollection.identifier, for: indexPath) as! TeamCellCollection
+        cell.configure(with: model)
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+        let item = collectionView.cellForItem(at: indexPath)
+        navigateToTeamDetails(Team(idTeam: "1233", strTeam: "12344", strTeamBadge: "45667", strStadiumThumb: "skdjfh"))
     }
 }

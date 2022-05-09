@@ -21,6 +21,12 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
         leaguesTable.delegate = self
         leaguesTable.dataSource = self
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.getFavLeagues()
+        leagues = viewModel.favLeaguesData.countrys
+        leaguesTable.reloadData()
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let leaguesDetail = segue.destination as! LeaguesDetailsViewController
         guard let  indexPath = sender as? IndexPath else { return }
@@ -44,9 +50,20 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
         cell.leagueTitle.text = leagues[indexPath.row].strLeague
         cell.leagueSport.text = leagues[indexPath.row].strSport
         cell.leagueBadge.sd_setImage(with: URL(string: leagues[indexPath.row].strBadge) )
+        cell.actionBlock = {
+            guard let subUrl = self.leagues[indexPath.row].strYoutube
+            else{
+                print("null")
+                return
+            }
+            let url = "http://\(subUrl)"
+            print( url)
+            UIApplication.shared.open(URL(string: url)!)
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         self.performSegue(withIdentifier: "showLeaguesDetails", sender: indexPath)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -23,10 +23,11 @@ class LeaguesTableViewCell: UITableViewCell{
         label.textAlignment = .center
         return label
     }()
-    let youtubeImageLink:UIImageView = {
-        let imageView = UIImageView()
-        return imageView
+    let youtubeImageLink:UIButton = {
+        let youtubeImageLink = UIButton()
+        return youtubeImageLink
     }()
+    var actionBlock: (() -> Void)? = nil
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(leagueBadge)
@@ -53,11 +54,18 @@ class LeaguesTableViewCell: UITableViewCell{
                                  height: 30)
         youtubeImageLink.frame = CGRect(x: contentView.frame.size.width-50,
                                         y: 4, width: 50, height: 40)
-        youtubeImageLink.image = UIImage(named: "youtube")
+        youtubeImageLink.setImage(UIImage(named: "youtube"), for: .normal)
+        youtubeImageLink.addTarget(self, action: "openLink", for: .touchUpInside)
     }
+    var myModel:Leagus?
     public func configure(with model:Leagus){
         leagueTitle.text = model.strLeague
         leagueBadge.sd_setImage(with: URL(string: model.strBadge) )
         leagueSport.text = model.strSport
+        
+    }
+    
+    @objc func openLink(){
+        actionBlock?()
     }
 }

@@ -65,6 +65,7 @@ class LeaguesDetailViewModel {
     }
     //working correctly
     func fetchLeaguesTeamsFromAPI (){
+        print(Constants.getLeaguesTeams(leagues: leagues.strLeague))
         allSportsService.fatchDataItemsFromAPI(url: Constants.getLeaguesTeams(leagues: leagues.strLeague), typeItem: TeamsResult.self) { (allSportsData, error) in
             if let error = error {
                 let message = error.localizedDescription
@@ -99,13 +100,19 @@ class LeaguesDetailViewModel {
     func toggleFav(appDelegate:AppDelegate){
         if(favouriteIcon == "heart"){
             addToFavourite(appDelegate: appDelegate)
-           // self.favouriteIcon = "heart_fill"
+           self.favouriteIcon = "heart_fill"
         }else{
+            removeFromFav(appDelegate: appDelegate)
             self.favouriteIcon = "heart"
         }
     }
     func addToFavourite(appDelegate:AppDelegate){
         coreDataService.saveToRoom(appDelegate: appDelegate , item: leagues)
+    }
+    func removeFromFav(appDelegate:AppDelegate){
+        coreDataService.removeLeagueFromCoreData(appDelegate: appDelegate , l: leagues){
+            self.favouriteIcon = "heart"
+        }
     }
     func getFavouriteIcon(appDelegate:AppDelegate)->String{
         coreDataService.getSingleLeagueFromCoreData(appDelegate: appDelegate, l: leagues){ (result) in

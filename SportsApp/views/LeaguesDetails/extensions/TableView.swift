@@ -33,6 +33,9 @@ extension LeaguesDetailsViewController :UITableViewDelegate ,UITableViewDataSour
             return cell
         case .collectionViewItem(let models, _ ) :
             let cell = tableView.dequeueReusableCell(withIdentifier: LatestEventCellTable.identifier, for: indexPath) as! LatestEventCellTable
+            cell.navigateToTeamDetails = { (team) in
+                self.performSegue(withIdentifier: "showTeam", sender: indexPath)
+            }
             cell.configure(with: models)
             return cell
         }
@@ -54,5 +57,10 @@ extension LeaguesDetailsViewController :UITableViewDelegate ,UITableViewDataSour
         case .list(_): return 120
         case .collectionViewItem(_ , let rows): return 180*CGFloat(rows)
         }
+    }
+    func navigateToTeams(team:Team){
+        var LegueDetail = self.storyboard?.instantiateViewController(withIdentifier: "TeamsViewController") as! TeamsViewController
+        LegueDetail.setTeam(team: team)
+        self.navigationController?.pushViewController(LegueDetail, animated: true)
     }
 }

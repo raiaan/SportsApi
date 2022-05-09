@@ -15,5 +15,5 @@ struct Leagus:Decodable{
     let strSport:String
     let strLeagueAlternate:String
     let strBadge:String
-    let strYoutube:String
+    let strYoutube:String?
 }

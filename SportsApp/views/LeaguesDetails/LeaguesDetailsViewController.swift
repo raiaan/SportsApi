@@ -60,12 +60,12 @@ class LeaguesDetailsViewController: UIViewController {
             self.table.reloadData()
         }
         if(shouldUpdateView == true){
-//            leaguesDetail?.updateFavState = {
-//                self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                    image: UIImage(
-//                        named:(self.leaguesDetail?.getFavouriteIcon(appDelegate:self.appDelegate))!), style: .plain,
-//                    target: self, action: #selector(self.addToFavourite))
- //           }
+            leaguesDetail?.updateFavState = {
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: UIImage(
+                        named:(self.leaguesDetail?.favouriteIcon)!), style: .plain,
+                    target: self, action: #selector(self.addToFavourite))
+            }
         }
     }
 }

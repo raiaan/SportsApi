@@ -24,6 +24,16 @@ class LeaguesSportTableViewController: UITableViewController {
         cell.leagueTitle.text = models[indexPath.row].strLeague
         cell.leagueSport.text = models[indexPath.row].strSport
         cell.leagueBadge.sd_setImage(with: URL(string: models[indexPath.row].strBadge) )
+        cell.actionBlock = {
+            guard let subUrl = self.models[indexPath.row].strYoutube
+            else{
+                print("null")
+                return
+            }
+            let url = "http://\(subUrl)"
+            print( url)
+            UIApplication.shared.open(URL(string: url)!)
+        }
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
