@@ -28,7 +28,9 @@ class LeaguesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initViewModelCallingBack()
+        self.title = league?.strLeague
         if(shouldUpdateView == true){
+            self.title = league?.strLeague
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: UIImage(
                     named:(leaguesDetail?.getFavouriteIcon(appDelegate:appDelegate))!), style: .plain,

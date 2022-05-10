@@ -14,5 +14,9 @@ struct Team:Decodable{
     let strTeam:String
     let strTeamBadge:String
     let strStadiumThumb:String?
-    
+    let strStadium:String
+    let strSport:String
+    let strLeague:String
+    let strStadiumDescription:String?
+    let strDescriptionEN:String?
 }

@@ -17,6 +17,7 @@ class AllSportsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Sports"
     }
     
     override func viewWillAppear(_ animated: Bool) {

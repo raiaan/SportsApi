@@ -65,15 +65,12 @@ class LeaguesDetailViewModel {
     }
     //working correctly
     func fetchLeaguesTeamsFromAPI (){
-        print(Constants.getLeaguesTeams(leagues: leagues.strLeague))
         allSportsService.fatchDataItemsFromAPI(url: Constants.getLeaguesTeams(leagues: leagues.strLeague), typeItem: TeamsResult.self) { (allSportsData, error) in
             if let error = error {
                 let message = error.localizedDescription
                 self.showTeamsError = message
-                print(error)
             } else {
                 self.allTeamsData = allSportsData
-                print(allSportsData)
             }
         }
     }

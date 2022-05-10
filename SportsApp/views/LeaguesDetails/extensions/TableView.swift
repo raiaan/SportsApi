@@ -34,7 +34,9 @@ extension LeaguesDetailsViewController :UITableViewDelegate ,UITableViewDataSour
         case .collectionViewItem(let models, _ ) :
             let cell = tableView.dequeueReusableCell(withIdentifier: LatestEventCellTable.identifier, for: indexPath) as! LatestEventCellTable
             cell.navigateToTeamDetails = { (team) in
-                self.performSegue(withIdentifier: "showTeam", sender: indexPath)
+                var teamViewController = self.storyboard?.instantiateViewController(withIdentifier: "TeamsViewController") as! TeamsViewController
+                teamViewController.setTeam(team: team)
+                self.navigationController?.pushViewController(teamViewController, animated: true)
             }
             cell.configure(with: models)
             return cell

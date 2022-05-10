@@ -40,7 +40,7 @@ class LeaguesSportTableViewController: UITableViewController {
         if currentReachabilityStatus == .notReachable {
             showDialoug()
         } else {
-            var LegueDetail = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as! LeaguesDetailsViewController
+            let LegueDetail = self.storyboard?.instantiateViewController(withIdentifier: "LeaguesDetailsViewController") as! LeaguesDetailsViewController
             LegueDetail.league = models[indexPath.row]
             LegueDetail.shouldUpdateView = true
             self.navigationController?.pushViewController(LegueDetail, animated: true)
@@ -51,6 +51,7 @@ class LeaguesSportTableViewController: UITableViewController {
     }
     func setSport(sport:MySport){
         leagusViewModels  = LeaguesSportViewModel(sport: sport)
+        self.title = "\(sport.strSport) Leagues"
     }
     func readLeagues(){
         guard let leagusViewModels = leagusViewModels else {

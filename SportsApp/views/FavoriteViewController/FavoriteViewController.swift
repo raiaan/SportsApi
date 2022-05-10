@@ -16,6 +16,7 @@ class FavoriteViewController: UIViewController , UITableViewDelegate ,UITableVie
     var currentSelectedItem:Leagus?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Favourite Leagues"
         leaguesTable.register( LeaguesTableViewCell.self, forCellReuseIdentifier: LeaguesTableViewCell.identifier )
         leagues = viewModel.favLeaguesData.countrys
         leaguesTable.delegate = self

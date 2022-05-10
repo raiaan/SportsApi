@@ -50,8 +50,6 @@ extension LatestEventCellTable: UICollectionViewDelegate , UICollectionViewDataS
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-        let item = collectionView.cellForItem(at: indexPath)
-        navigateToTeamDetails(Team(idTeam: "1233", strTeam: "12344", strTeamBadge: "45667", strStadiumThumb: "skdjfh"))
+        navigateToTeamDetails(models[indexPath.row])
     }
 }
